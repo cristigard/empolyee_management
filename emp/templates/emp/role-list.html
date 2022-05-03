@@ -1,0 +1,46 @@
+{% extends 'emp/base.html' %}
+{% block content %}
+{% if roles %}
+<div class="flex-container">
+  <div class="flex-child magenta">
+    <h4>All roles</h4>
+  </div>
+  <div class="flex-child green">
+    <a href="{% url 'add-role' %}" class="btn btn-secondary btn-sm" role="button">Add role</a>
+  </div>
+</div>
+<div class="table-responsive-sm">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Role name</th>
+      <th scope="col">Manage roles</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for role in roles %}
+  <tr>
+      <td>{{role}}
+      </td>
+      <td><a href="{{ role.get_update_url }}" class="btn btn-secondary btn-sm" role="button">Update</a>  
+          <a href="{{ role.get_delete_url }}" class="btn btn-danger btn-sm" role="button">Delete</a>
+        </td>
+  </tr>
+  {% endfor %} 
+  </tbody>
+</table>
+</div>
+{% else %}
+<div class="flex-container">
+  <div class="flex-child magenta">
+    <h4>No roles added yet</h4>
+    <hr style="width: 100%;margin: 0px;">
+    <p></p>
+  </div>
+  <div class="flex-child green">
+    <a href="{% url 'add-role' %}" class="btn btn-secondary btn-sm" role="button">Add role</a>
+  </div>
+</div>
+{% endif %}
+{% now "d F Y H:i" %}
+{% endblock content %}

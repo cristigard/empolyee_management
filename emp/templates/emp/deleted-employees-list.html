@@ -1,0 +1,38 @@
+{% extends 'emp/base.html' %}
+{% block content %}
+
+
+<h4>Ex employees</h4>
+
+<div class="table-responsive-sm">
+<table class="table table-striped">
+  <thead>
+    <tr>
+        <th scope="col">#</th>
+      <th scope="col">Full name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Manager</th>
+      <th scope="col">Role</th>
+      <th scope="col">CIM</th>
+      <th scope="col">Demisie</th>
+
+      <!-- <th scope="col" colspan="3" >Action</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    {% for employee in employees %}
+    <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <td >{{employee.last_name}} {{employee.first_name}}</td>
+        <td >{{employee.email}}</td>
+        <td >{{employee.manager}}</td>
+        <td >{{employee.role}}</td>
+        <td >{{employee.cim}} / {{employee.employment_date}}</td>   
+        <td >{{employee.deleted_date}}</td>  
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% now "d F Y H:i" %}
+{% endblock content %}

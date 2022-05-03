@@ -1,0 +1,14 @@
+{% extends 'emp/base.html' %}
+{% block content %}
+<h4>Login</h4>
+    <hr style="width: 300px;margin: 0px;">
+<form method="POST">
+	{% csrf_token%}
+	{{form}}
+	<br>
+	<button type="submit" class="btn btn-secondary btn">Login</button>
+	</form>
+<small>Need an account? <a href="{% url 'signup' %}">Sign Up</a></small><br>
+<small style="margin-top: -15px">Forget your password? <a href="{% url 'password_reset' %}">Reset password</a></small>
+
+{% endblock content %}

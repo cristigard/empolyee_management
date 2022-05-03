@@ -1,0 +1,49 @@
+{% extends 'emp/base.html' %}
+{% block content %}
+
+<div class="flex-container">
+
+  <div class="flex-child magenta">
+    <h4>{{employee}}</h4>
+  </div>
+  
+  <div class="flex-child green">
+    <a href="{{employee.get_update_url}}" class="btn btn-secondary btn-sm" role="button">Update</a>
+    <a href="{% url 'add-membership' employee.pk %}" class="btn btn-secondary btn-sm" role="button">Add to group</a>
+    <a href="{% url 'upload-file' employee.pk %}" class="btn btn-secondary btn-sm" role="button">Add file</a>
+    <a href="{{employee.get_delete_url}}" class="btn btn-danger btn-sm" role="button">Delete</a>
+  </div>
+ 
+</div>
+
+<div class="table-responsive-sm">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">CIM</th>
+      <th scope="col">Email</th>
+      <th scope="col">Role</th>
+      <th scope="col">Manager</th>
+      <th scope="col">Subalterns</th>
+      <th scope="col">Groups</th>
+      <th scope="col">Files</th>
+      <!-- <th scope="col" colspan="3" >Action</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+          <td >{{employee.cim}} / {{employee.employment_date|date:"Y-m-d"}}</td>
+            <td >{{employee.email}}</td>
+            <td >{{employee.role}}</td>
+            <td >{{employee.manager}}</td>
+            <td >{% for subaltern in employee.employee_set.all %}{{subaltern}}<br>{% endfor %} </td>
+            <td >{% for membership in employee.membership_set.all %}{{membership.group}}<br>{% endfor %}</td>
+            <td>{% for file in files %}{{file.file_name | truncatechars:10}} - <a href="{{file.get_delete_url}}">Delete</a> / <a href="{% url 'download-file' file.pk %}">Download</a><br>{% endfor %}</td>
+            <!-- <td>{% for file in files %}{{file | cut:'uploads/' | truncatechars:10}} - <a href="{{file.get_delete_url}}">Delete</a> / <a href="{% url 'download-file' file.pk %}">Download</a><br>{% endfor %}</td> -->
+
+    </tr>
+  </tbody>
+</table>
+</div>
+{% now "d F Y H:i" %}
+{% endblock content %}

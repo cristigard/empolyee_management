@@ -1,0 +1,14 @@
+{% extends 'emp/base.html' %}
+{% block content %}
+
+    <h5>Upload file for employee <a href="{% url 'employee-detail' employee.pk %}">{{employee}}</a></h5>
+    <hr style="width: 100%;margin: 0px;">
+    <br>
+    <form enctype="multipart/form-data" method="post">
+    {%csrf_token%}
+    {{form.as_p}}
+   <p></p>
+   <button type="submit" class="btn btn-secondary btn">Upload</button>
+</form>
+
+{% endblock content %}

@@ -1,0 +1,52 @@
+
+{% extends 'emp/base.html' %}
+{% block content %}
+{% if groups %}
+<div class="flex-container">
+  <div class="flex-child magenta">
+    <h4>All groups</h4>
+  </div>
+  <div class="flex-child green">
+    <a href="{% url 'add-group' %}" class="btn btn-secondary btn-sm" role="button">Add group</a>
+    <a href="{% url 'employee-list' %}" class="btn btn-secondary btn-sm" role="button">Add members</a>
+  </div>
+</div>
+<div class="table-responsive-sm">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Group name</th>
+      <th scope="col">Members</th>
+      <th scope="col">Manage group</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for group in groups %}
+  <tr>
+      <td >{{group}} <a href=""></a></td>  
+      <td>{% for member in group.members.all %}<a href="{% url 'employee-detail' member.pk %}">{{member}}</a> / {{member.membership_set.first.date_joined|date:"d M Y"}} - 
+          <a href="{% url 'delete-membership' member.membership_set.first.pk %}">Delete</a><p></p>{% endfor %}
+      </td>
+      <td><a href="{{ group.get_update_url }}" class="btn btn-secondary btn-sm" role="button">Update</a>  
+          <a href="{{ group.get_delete_url }}" class="btn btn-danger btn-sm" role="button">Delete</a>
+        </td>
+  </tr>
+  {% endfor %} 
+  </tbody>
+</table>
+</div>
+{% else %}
+<div class="flex-container">
+  <div class="flex-child magenta">
+    <h4>No group added yet</h4>
+    <hr style="width: 100%;margin: 0px;">
+    <p></p>
+  </div>
+  <div class="flex-child green">
+    <a href="{% url 'add-group' %}" class="btn btn-secondary btn-sm" role="button">Add group</a>
+  </div>
+</div>
+{% endif %}
+{% now "d F Y H:i" %}
+{% endblock content %}
+ 

@@ -1,0 +1,77 @@
+{% extends 'emp/base.html' %}
+{% block content %}
+
+  {% if employees.0.owner == user %}
+    <div class="flex-container">
+
+      <div class="flex-child magenta">
+        <h4>All employees</h4>
+      </div>
+      
+      <div class="flex-child green">
+        <a href="{% url 'employee-add' %}" class="btn btn-secondary btn-sm" role="button">Add employee</a>
+        <a href="{% url 'deleted-employees' %}" class="btn btn-secondary btn-sm" role="button">Ex employees</a>
+      </div>
+    
+    </div>
+    {% if employees %}
+    <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Full name</th>
+          <th scope="col">CIM</th>
+          <th scope="col">Email</th>
+          <th scope="col">Role</th>
+          <th scope="col">Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for employee in employees %}
+        <tr>
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{employee.last_name}} {{employee.first_name}}</td>
+          <td>{{employee.cim}} / {{employee.employment_date|date:"Y-m-d"}}</td>
+          <td>{{employee.email}}</td>
+          <td>{{employee.role}}</td>
+          <td><a href="{{employee.get_absolute_url}}">See more</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+    {% else %}
+    <div class="flex-container">
+
+      <div class="flex-child magenta">
+        <h4>No employees added yet</h4>
+        <hr style="width: 100%;margin: 0px;">
+      </div>
+      
+      <div class="flex-child green">
+        <a href="{% url 'employee-add' %}" class="btn btn-secondary btn-sm" role="button">Add employee</a>
+        <a href="{% url 'deleted-employees' %}" class="btn btn-secondary btn-sm" role="button">Ex employees</a>
+      </div>
+    
+    </div>
+    {% endif %}
+
+    {% else %}
+    <div class="flex-container">
+
+      <div class="flex-child magenta">
+        <h4>No employees added yet</h4>
+        <hr style="width: 100%;margin: 0px;">
+    <p></p>
+      </div>
+      
+      <div class="flex-child green">
+        <a href="{% url 'employee-add' %}" class="btn btn-secondary btn-sm" role="button">Add employee</a>
+        <a href="{% url 'deleted-employees' %}" class="btn btn-secondary btn-sm" role="button">Ex employees</a>
+      </div>
+    
+    </div>
+  {% endif %}
+  {% now "d F Y H:i" %}
+{% endblock content %}

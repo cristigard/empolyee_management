@@ -1,0 +1,21 @@
+{% extends 'emp/base.html' %}
+{% block content %}
+
+<h4>Edit profile - {{user.username}}</h4>
+<p></p>
+<img src="{{ user.image.url }}">
+<p></p>
+<form enctype="multipart/form-data" method="POST">{% csrf_token %}
+{{form.as_p}}
+<p></p><br>
+<button type="submit" class="btn btn-secondary btn">Save</button>
+
+</form>
+
+{% endblock content %}
+
+<div id="textbox">
+  <p style="float: left;"><input type="Submit" value="Edit"></p>
+  <p style="float: left;"><a style="color: black; padding-left: 52px" href="{% url 'password_change' %}"><small>Change pasword</small></a></p>
+</div>
+

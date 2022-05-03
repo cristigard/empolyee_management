@@ -1,0 +1,14 @@
+{% extends 'emp/base.html' %}
+
+{% block content %}
+<div class=" p-md-2 ">
+    <h4>Add membership for {{employee}}</h4>
+    <hr style="width: 100%;margin: 0px;">
+    <p></p>
+    <form action="" method="post">{% csrf_token %}
+        {{form}}
+        <br>
+        <button type="submit" class="btn btn-secondary btn">Add</button>
+    <form>
+</div>
+  {% endblock %}

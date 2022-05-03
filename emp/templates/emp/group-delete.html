@@ -1,0 +1,12 @@
+{% extends 'emp/base.html' %}
+{% block content %}
+
+<h5>Are you sure you want to delete {{group}} group?</h5>
+<hr style="width: 100%;margin: 0px;">
+<p></p>
+<form method="POST">{% csrf_token %}
+    <button type="submit" class="btn btn-danger btn">Yes</button>
+    <a href="{{request.META.HTTP_REFERER}}" class="btn btn-secondary btn" role="button">No</a>
+</form>
+
+{% endblock content %}
